@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h3>주차시작 시간은 {{start_charge}} 이고 주차종료 시간은 {{end_charge}} 입니다.</h3>
+
+
+<h3>총 예약하신 시간은 {{time}} 입니다</h3>
+
+<h3>요금은 {{bill}} 입니다</h3>
+
+<!-- parking 이랑 reserve 찾아서 객체 돌리는거 pk값 넘겨서 찾고 리무브 시키면됨 -->
+<a class="btn btn-default" href="{% url 'reserve_remove' pk=parking.pk pk2=reserve.pk %}">현금 입금</a>
+{% endblock %}

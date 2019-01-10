@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for parking in parkings %}
+        <div class="post">
+            <div class="date">
+                {{ parking.published_date }}
+            </div>
+            <h1><a href="{% url 'parking_detail' pk=parking.pk %}">{{ parking.title }}</a></h1>
+            <p>{{ parking.text|linebreaksbr }}</p>
+            <h3>현재 자리 예약 개수: {{ parking.reserves.count }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

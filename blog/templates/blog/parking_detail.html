@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="parking">
+        {% if parking.published_date %}
+            <div class="date">
+                {{ parking.published_date }}
+            </div>
+        {% endif %}
+      <!--이것도 주차장 자리 추가 옵션   <a class="btn btn-default" href="{% url 'parking_edit' pk=parking.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>  -->
+        <h1>{{ parking.title }}</h1>
+        <p>{{ parking.text|linebreaksbr }}</p>
+    </div>
+    <hr>
+    <a class="btn btn-default" href="{% url 'add_reserve_to_parking' pk=parking.pk %}">Add reserve</a>
+    <h3>오늘 예약 상황</h3>
+    {% for a in appoint %}
+    <div class="reserve">
+        <div class="date"><예약시간> {{ a.start }} ~ {{a.end}}</div>
+        <strong>{{ a.author }}</strong>
+        <div class="date"><작성시간> {{ a.created_date}}</div>
+        <p>{{ a.text|linebreaks }}</p>
+        <a class="btn btn-default" href="{% url 'reserve_detail' pk=parking.pk pk2=a.pk %}">계산</a>
+    </div>
+    {% empty %}
+    <p>오늘 예약이 아직 없습니다</p>
+    {% endfor %}
+
+    <h3>전체 예약 현황</h3>
+    {% for reserve in parking.reserves.all %}
+    <div class="reserve">
+        <div class="date"><예약시간> {{ reserve.start }} ~ {{reserve.end}}</div>
+        <strong>{{ reserve.author }}</strong>
+        <div class="date"><작성시간> {{ reserve.created_date}}</div>
+        <p>{{ reserve.text|linebreaks }}</p>
+    </div>
+    {% empty %}
+    <p>아직 예약이 없습니다</p>
+    {% endfor %}
+{% endblock %}
