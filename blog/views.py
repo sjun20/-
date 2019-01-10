@@ -84,7 +84,7 @@ def reserve_detail(request, pk, pk2):
     end_day = end_charge[8:10]
     end_hour = end_charge[11:13]
     end_minute = end_charge[14:16]
-
+    aaa = 39494
 
     time = reserve.end - reserve.start
     #시간당 요금계산 구현해야함
